@@ -1,0 +1,55 @@
+package edu.smith.cs.csc212.p5;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+
+public class SnakePart extends WorldObject {
+	public static Color[] COLORS = { Color.red, Color.green, Color.yellow, Color.magenta, Color.pink, Color.cyan
+
+	};
+	/**
+	 * This is an index into the {@link #COLORS} array.
+	 */
+	int color;
+
+	public SnakePart(int color, World world) {
+		super(world);
+		this.color = color;
+	}
+
+	@Override
+	public void draw(Graphics2D g) {
+		// TODO Auto-generated method stub
+		//Shape circle = new Ellipse2D.Double(-0.6, -0.6, 1.2, 1.2);
+		
+			Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
+			//Shape body = new drawRect(int x, int y, int width, int height); 
+			//Shape tail = new Ellipse2D.Double(+.2, -.3, .2, .6);
+
+			Color color = COLORS[this.color];
+			Color tailColor = color.darker();
+
+			Graphics2D flipped = (Graphics2D) g.create();
+
+			// Draw the fish of size (1x1, roughly, at 0,0).
+			flipped.setColor(color);
+			flipped.fill(body);
+
+
+			// draw tail:
+			//flipped.setColor(tailColor);
+			//flipped.fill(tail);
+
+			flipped.dispose();
+
+	}
+
+	@Override
+	public void step() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

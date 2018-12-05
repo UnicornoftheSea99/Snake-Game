@@ -10,7 +10,12 @@ import java.awt.geom.Rectangle2D;
 import me.jjfoley.gfx.GFX;
 import me.jjfoley.gfx.IntPoint;
 import me.jjfoley.gfx.TextBox;
-
+/***
+ * This is a snake game uses the implementation of P2 (the fish game)
+ * 
+ * @author libby
+ *
+ */
 
 public class P5Main extends GFX {
 	public static int VISUAL_GRID_SIZE = 550;
@@ -30,7 +35,7 @@ public class P5Main extends GFX {
 	/**
 	 * This is where the game logic lives.
 	 */
-	FishGame game;
+	PacManGame game;
 	/**
 	 * This TextBox wraps up making fonts and centering text.
 	 */
@@ -38,15 +43,15 @@ public class P5Main extends GFX {
 	/**
 	 * This is a rectangle representing the TOP_PART of the screen.
 	 */
-	Rectangle2D topRect;
+	Rectangle2D topRectangle;
 	
 	public P5Main() {
 		super(VISUAL_GRID_SIZE + BORDER * 2, VISUAL_GRID_SIZE + BORDER * 2 + TOP_PART);
-		game = new FishGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+		game = new PacManGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
 		gameState.color = Color.WHITE;
 		gameState.setFont(TextBox.BOLD_FONT);
 		gameState.setFontSize(TOP_PART / 3.0);
-		topRect = new Rectangle2D.Double(0, 0, getWidth(), TOP_PART);
+		topRectangle = new Rectangle2D.Double(0, 0, getWidth(), TOP_PART);
 	}
 
 	/**
@@ -87,7 +92,7 @@ public class P5Main extends GFX {
 				World world = game.world;
 
 				// Draw TOP_PART TextBox.
-				this.gameState.centerInside(this.topRect);
+				this.gameState.centerInside(this.topRectangle);
 				this.gameState.draw(g);
 
 				// Slide the world down, and into the box.
@@ -156,7 +161,7 @@ public class P5Main extends GFX {
 				if (game.gameOver()) {
 					this.gameState.setString("You win! Click anywhere start again!");
 					if (this.processClick() != null) {
-						this.game = new FishGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+						this.game = new PacManGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
 					}
 					return;
 				}
@@ -200,7 +205,7 @@ public class P5Main extends GFX {
 			}
   
 	public static void main(String[] args) {
-    System.out.println("P5 Main Started!");
+    //System.out.println("P5 Main Started!");
     GFX app = new P5Main();
     app.start();
   }
