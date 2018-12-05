@@ -35,7 +35,7 @@ public class P5Main extends GFX {
 	/**
 	 * This is where the game logic lives.
 	 */
-	PacManGame game;
+	SnakeGame game;
 	/**
 	 * This TextBox wraps up making fonts and centering text.
 	 */
@@ -47,7 +47,7 @@ public class P5Main extends GFX {
 	
 	public P5Main() {
 		super(VISUAL_GRID_SIZE + BORDER * 2, VISUAL_GRID_SIZE + BORDER * 2 + TOP_PART);
-		game = new PacManGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+		game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
 		gameState.color = Color.WHITE;
 		gameState.setFont(TextBox.BOLD_FONT);
 		gameState.setFontSize(TOP_PART / 3.0);
@@ -161,7 +161,7 @@ public class P5Main extends GFX {
 				if (game.gameOver()) {
 					this.gameState.setString("You win! Click anywhere start again!");
 					if (this.processClick() != null) {
-						this.game = new PacManGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
 					}
 					return;
 				}

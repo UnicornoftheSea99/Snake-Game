@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 //new changes who this
 
-public class PacManGame {
+public class SnakeGame {
 	/**
 	 * This is the world in which the fish are missing. (It's mostly a List!).
 	 */
@@ -53,7 +53,7 @@ public class PacManGame {
 	 * @param w how wide is the grid?
 	 * @param h how tall is the grid?
 	 */
-	public PacManGame(int w, int h) {
+	public SnakeGame(int w, int h) {
 		world = new World(w, h);
 
 		missing = new ArrayList<SnakePart>();
