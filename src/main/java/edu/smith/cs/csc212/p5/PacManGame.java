@@ -1,10 +1,13 @@
 package edu.smith.cs.csc212.p5;
 
 import java.awt.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+//new changes who this
 
 public class PacManGame {
 	/**
