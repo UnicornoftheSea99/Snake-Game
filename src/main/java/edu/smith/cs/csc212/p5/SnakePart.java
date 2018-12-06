@@ -30,7 +30,7 @@ public class SnakePart extends WorldObject {
 			Shape body2 = new Ellipse2D.Double(-.25, -.25, .5, .5);
 
 			Color color = COLORS[this.color];
-			Color tailColor = color.darker();
+			//Color tailColor = color.darker();
 
 			Graphics2D flipped = (Graphics2D) g.create();
 
