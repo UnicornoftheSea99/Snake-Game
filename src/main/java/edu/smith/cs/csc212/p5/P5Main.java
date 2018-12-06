@@ -71,11 +71,11 @@ public class P5Main extends GFX {
 	}
 
 	/**
-	 * Picking a nicer blue than Color.blue.
+	 * Black background.
 	 */
 	public static Color BOARD_COLOR = new Color(0, 0, 0);
 	/**
-	 * Making a darker blue for the grid.
+	 * White grid
 	 */
 	public static Color GRID_COLOR = new Color(255, 255, 225);
 

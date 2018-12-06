@@ -21,7 +21,7 @@ public class SnakeGame {
 	/**
 	 * The home location.
 	 */
-	FishHome home;
+	//FishHome home;
 	/**
 	 * These are the missing fish!
 	 */
