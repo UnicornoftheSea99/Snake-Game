@@ -23,7 +23,7 @@ public class P5Main extends GFX {
 	 * Game size (logical).
 	 */
 
-	public static int LOGICAL_GRID_SIZE = 15;
+	public static int LOGICAL_GRID_SIZE = 13;
 	/**
 	 * The words appear in the top part of the screen.
 	 */
@@ -31,7 +31,7 @@ public class P5Main extends GFX {
 	/**
 	 * There's a border to make it look pretty (the board is inset by this much).
 	 */
-	public static int BORDER = 5;
+	public static int BORDER = 1;
 	/**
 	 * This is where the game logic lives.
 	 */
@@ -159,13 +159,25 @@ public class P5Main extends GFX {
 			public void update(double secondsSinceLastUpdate) {
 				// Handle game-over and restart.
 				if (game.gameOver()) {
-					this.gameState.setString("You win! Click anywhere start again!");
+					
+					this.gameState.setString("You Lose! Please try again!");
+					//"You win! Click anywhere start again!"
 					if (this.processClick() != null) {
 						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
 					}
 					return;
 				}
-				
+				/**
+				 if(game.gameOverWIN()) {
+					
+					this.gameState.setString("You win! Click anywhere start again!");
+					//"You win! Click anywhere start again!"
+					if (this.processClick() != null) {
+						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+					}
+					return;
+				}
+				*/
 				// Update the text in the TextBox.
 				this.gameState.setString(
 						"Step #: " + game.stepsTaken + 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-//new changes who this
+
 
 public class SnakeGame {
 	/**
@@ -18,10 +18,7 @@ public class SnakeGame {
 	 * The player (a Fish.COLORS[0]-colored fish) goes seeking their friends.
 	 */
 	SnakeHead player;
-	/**
-	 * The home location.
-	 */
-	//FishHome home;
+
 	/**
 	 * These are the missing fish!
 	 */
@@ -94,7 +91,15 @@ public class SnakeGame {
 	 * @return true if the player has won (or maybe lost?).
 	 */
 	public boolean gameOver() {
-		// We want to bring the fish home before we win!
+		
+		
+		if (player.getX() < 0 || player.getX() >= world.getWidth() || player.getY() < 0
+				|| player.getY() >= world.getHeight()) {
+			
+			return true;
+		}
+		
+		// if you collect all of the snake parts
 		return missing.isEmpty();
 	}
 
