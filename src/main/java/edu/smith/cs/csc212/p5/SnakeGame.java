@@ -74,6 +74,7 @@ public class SnakeGame {
 
 		// Generate fish of all the colors but the first into the "missing" List.
 		for (int ft = 1; ft < SnakePart.COLORS.length; ft++) {
+//		for (int ft=0; ft<20; ft++) {
 			SnakePart friend = world.insertSnakePartRandomly(ft);
 			missing.add(friend);
 		}
