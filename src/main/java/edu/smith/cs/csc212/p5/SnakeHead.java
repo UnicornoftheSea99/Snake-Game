@@ -46,9 +46,9 @@ public class SnakeHead extends WorldObject {
 		//Shape body = new drawRect(int x, int y, int width, int height); 
 		//Shape tail = new Ellipse2D.Double(+.2, -.3, .2, .6);
 		Shape eyeL = new Ellipse2D.Double(-.2, -.05, .15, .15);
-		Shape eyeLW = new Ellipse2D.Double(-0.3, -0.1, .3, .3);
+		Shape eyeLW = new Ellipse2D.Double(-0.3, -0.17, .3, .3);
 		Shape eyeR = new Ellipse2D.Double(0.15,-0.05,0.15,0.15);
-		Shape eyeRW = new Ellipse2D.Double(0.03, -0.1, 0.3, 0.3);
+		Shape eyeRW = new Ellipse2D.Double(0.03, -0.17, 0.3, 0.3);
 
 		Color color = Color.red;
 		Color tailColor = color.darker();
