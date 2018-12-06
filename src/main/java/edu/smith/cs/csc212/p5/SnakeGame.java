@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+
 //new changes who this
 
 public class SnakeGame {
+	
+	Random rand = ThreadLocalRandom.current(); 
 	/**
 	 * This is the world in which the fish are missing. (It's mostly a List!).
 	 */
@@ -74,7 +77,6 @@ public class SnakeGame {
 
 		// Generate fish of all the colors but the first into the "missing" List.
 		for (int ft = 1; ft < SnakePart.COLORS.length; ft++) {
-//		for (int ft=0; ft<20; ft++) {
 			SnakePart friend = world.insertSnakePartRandomly(ft);
 			missing.add(friend);
 		}
@@ -101,11 +103,23 @@ public class SnakeGame {
 
 	/**
 	 * Update positions of everything (the user has just pressed a button).
+	 * @param moved 
 	 */
-	public void step() {
+	public void step(boolean moved) {
+		if (!moved) {
+			// TODO step the snake forward
+		}
 		// Keep track of how long the game has run.
 		this.stepsTaken += 1;
 
+		//Insert new snake part randomly
+				if (rand.nextInt(30) == 0) {
+					for (int ft = 1; ft < (SnakePart.COLORS.length)/4; ft++) {
+					SnakePart friendRand = world.insertSnakePartRandomly(ft);
+					missing.add(friendRand);
+					}
+				}
+				
 		// These are all the objects in the world in the same cell as the player.
 		List<WorldObject> overlap = this.player.findSameCell();
 		// The player is there, too, let's skip them.
@@ -133,7 +147,7 @@ public class SnakeGame {
 		}
 
 		// Make sure missing fish *do* something.
-		wanderMissingFish();
+		//wanderMissingFish();
 		// When fish get added to "found" they will follow the player around.
 		World.objectsFollow(player, found);
 		// Step any world-objects that run themselves.
@@ -143,11 +157,11 @@ public class SnakeGame {
 	/**
 	 * Call moveRandomly() on all of the missing fish to make them seem alive.
 	 */
-	private void wanderMissingFish() {
-		Random rand = ThreadLocalRandom.current();
-		// check what kind of fish it is normal or fast scared
-
-	}
+//	private void wanderMissingFish() {
+//		Random rand = ThreadLocalRandom.current();
+//		check what kind of fish it is normal or fast scared
+//
+//	}
 
 	/**
 	 * This gets a click on the grid. We want it to destroy rocks that ruin the
