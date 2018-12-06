@@ -170,9 +170,9 @@ public class P5Main extends GFX {
 				
 				// Update the text in the TextBox.
 				this.gameState.setString(
-						"Step #: " + game.stepsTaken + 
+						//"Time: " + game.stepsTaken + 
 						//" ... Fish Left: " + game.missingFishLeft() +
-						" ... Score: "+ game.score);
+						" Score: "+ game.score);
 
 				// Read the state of the keyboard:
 				boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);
