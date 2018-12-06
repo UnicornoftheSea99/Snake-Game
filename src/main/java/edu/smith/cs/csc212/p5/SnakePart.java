@@ -27,6 +27,7 @@ public class SnakePart extends WorldObject {
 			Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
 			//Shape body = new drawRect(int x, int y, int width, int height); 
 			//Shape tail = new Ellipse2D.Double(+.2, -.3, .2, .6);
+			Shape body2 = new Ellipse2D.Double(-.25, -.25, .5, .5);
 
 			Color color = COLORS[this.color];
 			Color tailColor = color.darker();
@@ -36,6 +37,8 @@ public class SnakePart extends WorldObject {
 			// Draw the fish of size (1x1, roughly, at 0,0).
 			flipped.setColor(color);
 			flipped.fill(body);
+			flipped.setColor(Color.black);
+			flipped.fill(body2);
 
 
 			// draw tail:
