@@ -156,7 +156,7 @@ public class SnakeGame {
 	 * @param y - the y-tile.
 	 */
 	public void click(int x, int y) {
-		hello
+		
 	}
 
 }

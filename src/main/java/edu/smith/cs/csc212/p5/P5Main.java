@@ -23,7 +23,7 @@ public class P5Main extends GFX {
 	 * Game size (logical).
 	 */
 
-	public static int LOGICAL_GRID_SIZE = 13;
+	public static int LOGICAL_GRID_SIZE = 15;
 	/**
 	 * The words appear in the top part of the screen.
 	 */
