@@ -150,7 +150,10 @@ public class P5Main extends GFX {
 				}
 				return null;
 			}
- 
+
+			
+			int delay = 0;
+
 			/**
 			 * We separate our "PlayFish" game logic update here.
 			 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is between each update, but we don't actually care here.
@@ -180,9 +183,9 @@ public class P5Main extends GFX {
 				*/
 				// Update the text in the TextBox.
 				this.gameState.setString(
-						"Step #: " + game.stepsTaken + 
+						//"Time: " + game.stepsTaken + 
 						//" ... Fish Left: " + game.missingFishLeft() +
-						" ... Score: "+ game.score);
+						" Score: "+ game.score);
 
 				// Read the state of the keyboard:
 				boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);
@@ -205,13 +208,15 @@ public class P5Main extends GFX {
 				
 				IntPoint click = mouseToGame(this.processClick());
 				
+				delay += 1;
 				// Only advance the game if the player presses something!
-				if (skip || moved || click != null) {
+				if (skip || moved || click != null || delay > 20) {
+					delay = 0;
 					if (click != null) {
 						this.game.click(click.x, click.y);
 					}
 					// Update game logic!
-					this.game.step();
+					this.game.step(moved);
 					// Update message at the top!
 				}
 			}

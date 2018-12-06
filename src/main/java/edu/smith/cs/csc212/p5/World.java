@@ -258,7 +258,9 @@ public class World {
 	 * @param followers a set of objects to follow the leader.
 	 */
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
-
+		if (followers.isEmpty() || target.recentPositions.isEmpty()) {
+			return;
+		}
 		// What is recentPositions?
 		// recentPositions is the place where the wandering fish
 		// go after they have been found. For example,
@@ -277,8 +279,14 @@ public class World {
 		// the target fish. We do not want that because we still need to see the
 		// target fish as it collects the remaining missing fish.
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
+		IntPoint last = putWhere.get(putWhere.size()-1);
 		for (int i = 0; i < followers.size(); i++) {
-			IntPoint past = putWhere.get(i + 1);
+			IntPoint past;
+			if (i+1 >= putWhere.size()) {
+				past = last;
+			} else {
+				past = putWhere.get(i + 1);
+			}
 			followers.get(i).setPosition(past.x, past.y);
 		}
 	}

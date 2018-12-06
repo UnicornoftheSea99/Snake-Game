@@ -6,7 +6,10 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
 public class SnakePart extends WorldObject {
-	public static Color[] COLORS = { Color.red, Color.green, Color.yellow, Color.magenta, Color.pink, Color.cyan, Color.cyan
+
+	public static Color[] COLORS = { Color.red, Color.green, Color.magenta, Color.pink, Color.cyan,
+			Color.red, Color.GREEN,Color.BLUE, Color.CYAN,Color.MAGENTA, Color.ORANGE, Color.PINK, Color.orange, 
+			Color.WHITE, Color.white
 
 	};
 	/**

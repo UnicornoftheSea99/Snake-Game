@@ -1,15 +1,14 @@
 package edu.smith.cs.csc212.p5;
 
 import java.awt.Color;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-
-
 public class SnakeGame {
+
+	Random rand = ThreadLocalRandom.current(); 
 	/**
 	 * This is the world in which the fish are missing. (It's mostly a List!).
 	 */
@@ -36,6 +35,8 @@ public class SnakeGame {
 
 	//fishFood food;
 
+	PowerUps powerup;
+
 	/**
 	 * Score!
 	 */
@@ -60,7 +61,7 @@ public class SnakeGame {
 		z = 10;
 		u = 8;
 		//for (int i = 0; i < u; i++) {
-			//world.insertfishFood();
+		//world.insertfishFood();
 		//}
 
 		// Make the player out of the 0th fish color.
@@ -73,6 +74,10 @@ public class SnakeGame {
 		for (int ft = 1; ft < SnakePart.COLORS.length; ft++) {
 			SnakePart friend = world.insertSnakePartRandomly(ft);
 			missing.add(friend);
+		}
+		for (int i=0; i<2; i++) {
+			PowerUps powerup = new PowerUps(world);
+			world.insertRandomly(powerup);
 		}
 	}
 
@@ -105,10 +110,27 @@ public class SnakeGame {
 
 	/**
 	 * Update positions of everything (the user has just pressed a button).
+	 * @param moved 
 	 */
-	public void step() {
+	public void step(boolean moved) {
+		if (!moved) {
+			// TODO step the snake forward
+		}
 		// Keep track of how long the game has run.
 		this.stepsTaken += 1;
+
+		//Insert new snake part randomly
+		if (rand.nextInt(50) == 0) {
+			for (int ft = 1; ft < (SnakePart.COLORS.length)/4; ft++) {
+				SnakePart friendRand = world.insertSnakePartRandomly(ft);
+				missing.add(friendRand);
+			}
+		}
+
+		//Insert new powerup randomly
+		if (rand.nextInt(75) == 0) {
+			this.world.insertRandomly(new PowerUps(world));
+		}
 
 		// These are all the objects in the world in the same cell as the player.
 		List<WorldObject> overlap = this.player.findSameCell();
@@ -128,16 +150,20 @@ public class SnakeGame {
 				SnakePart justFound = (SnakePart) wo;
 				found.add(justFound);
 
-				// Increase score when you find a fish!
-
-				
+				// Increase score when you find a snake part!
 				score += 10;
 
+			}
+			// Points for FishFood!
+			//If player comes across fish food, get 20 pts and fish food disappear from world
+			if (wo instanceof PowerUps) {
+				score += 20;
+				world.remove(wo);
 			}
 		}
 
 		// Make sure missing fish *do* something.
-		wanderMissingFish();
+		//wanderMissingFish();
 		// When fish get added to "found" they will follow the player around.
 		World.objectsFollow(player, found);
 		// Step any world-objects that run themselves.
@@ -147,11 +173,11 @@ public class SnakeGame {
 	/**
 	 * Call moveRandomly() on all of the missing fish to make them seem alive.
 	 */
-	private void wanderMissingFish() {
-		Random rand = ThreadLocalRandom.current();
-		// check what kind of fish it is normal or fast scared
-
-	}
+	//	private void wanderMissingFish() {
+	//		Random rand = ThreadLocalRandom.current();
+	//		check what kind of fish it is normal or fast scared
+	//
+	//	}
 
 	/**
 	 * This gets a click on the grid. We want it to destroy rocks that ruin the
@@ -161,7 +187,21 @@ public class SnakeGame {
 	 * @param y - the y-tile.
 	 */
 	public void click(int x, int y) {
-		
+
 	}
 
 }
+
+//public enum TTTState {
+//	Player1Turn, // 0
+//	Player2Turn, // 1
+//	Tie,         // 2
+//	Player1Win,  // 3
+//	Player2Win   // 4
+//	;
+//	
+//	public boolean isPlaying() {
+//		return this == Player1Turn || this == Player2Turn;
+//	}
+//}
+
