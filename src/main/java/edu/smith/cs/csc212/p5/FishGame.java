@@ -1,15 +1,12 @@
 package edu.smith.cs.csc212.p5;
 
 import java.awt.Color;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-//new changes who this
-
-public class SnakeGame {
+public class FishGame {
 	/**
 	 * This is the world in which the fish are missing. (It's mostly a List!).
 	 */
@@ -17,7 +14,7 @@ public class SnakeGame {
 	/**
 	 * The player (a Fish.COLORS[0]-colored fish) goes seeking their friends.
 	 */
-	SnakeHead player;
+	Fish player;
 	/**
 	 * The home location.
 	 */
@@ -25,12 +22,12 @@ public class SnakeGame {
 	/**
 	 * These are the missing fish!
 	 */
-	List<SnakePart> missing;
+	List<Fish> missing;
 
 	/**
 	 * These are fish we've found!
 	 */
-	List<SnakePart> found;
+	List<Fish> found;
 
 	/**
 	 * Number of steps!
@@ -53,12 +50,12 @@ public class SnakeGame {
 	 * @param w how wide is the grid?
 	 * @param h how tall is the grid?
 	 */
-	public SnakeGame(int w, int h) {
+	public FishGame(int w, int h) {
 		world = new World(w, h);
 
-		missing = new ArrayList<SnakePart>();
-		found = new ArrayList<SnakePart>();
-		//home = world.insertFishHome();
+		missing = new ArrayList<Fish>();
+		found = new ArrayList<Fish>();
+		home = world.insertFishHome();
 		//food = world.insertfishFood();
 		z = 10;
 		u = 8;
@@ -66,15 +63,23 @@ public class SnakeGame {
 			//world.insertfishFood();
 		//}
 
+		//for (int i = 0; i < z; i++) {
+			//world.insertRockRandomly();
+			//world.insertRandomly(new FallingRock(world));
+		//}
+
+		//world.insertSnailRandomly();
+
 		// Make the player out of the 0th fish color.
-		player = new SnakeHead(world);
+		player = new Fish(0, world);
 		// Start the player at "home".
-		//player.setPosition(home.getX(), home.getY());
+		player.setPosition(home.getX(), home.getY());
+		player.markAsPlayer();
 		world.register(player);
 
 		// Generate fish of all the colors but the first into the "missing" List.
-		for (int ft = 1; ft < SnakePart.COLORS.length; ft++) {
-			SnakePart friend = world.insertSnakePartRandomly(ft);
+		for (int ft = 1; ft < Fish.COLORS.length; ft++) {
+			Fish friend = world.insertFishRandomly(ft);
 			missing.add(friend);
 		}
 	}
@@ -120,13 +125,16 @@ public class SnakeGame {
 				// Tell it to be found instead.
 
 				// found.add((Fish)wo);
-				SnakePart justFound = (SnakePart) wo;
+				Fish justFound = (Fish) wo;
 				found.add(justFound);
 
 				// Increase score when you find a fish!
 
-				
-				score += 10;
+				if (justFound.getColor() == Color.green) {
+					score += 100;
+				} else {
+					score += 10;
+				}
 
 			}
 		}
@@ -146,6 +154,22 @@ public class SnakeGame {
 		Random rand = ThreadLocalRandom.current();
 		// check what kind of fish it is normal or fast scared
 
+		for (Fish lost : missing) {
+			if (lost.getfastScared() == false) {
+				// 30% of the time, lost fish move randomly.
+				if (rand.nextDouble() < 0.3) {
+					lost.moveRandomly();
+
+				} else if (lost.getfastScared() == true) {
+					if (rand.nextDouble() < 0.8) {
+						lost.moveRandomly();
+					}
+
+				}
+
+			}
+
+		}
 	}
 
 	/**
@@ -156,7 +180,13 @@ public class SnakeGame {
 	 * @param y - the y-tile.
 	 */
 	public void click(int x, int y) {
-		
+		List<WorldObject> atPoint = world.find(x, y);
+		if (atPoint.isEmpty() == false) {
+			//if (atPoint.get(0).isRock()) {
+				atPoint.get(0).remove();
+			}
+		}
+
 	}
 
-}
+//}

@@ -172,17 +172,18 @@ public class World {
 	 * @param color - the color of the fish.
 	 * @return the new fish itself.
 	 */
+
 	public SnakePart insertSnakePartRandomly(int color) {
 		SnakePart f = new SnakePart(color, this);
 		insertRandomly(f);
 		return f;
 	}
 
-	public FishHome insertFishHome() {
-		FishHome home = new FishHome(this);
-		insertRandomly(home);
-		return home;
-	}
+	//public FishHome insertFishHome() {
+		//FishHome home = new FishHome(this);
+		//insertRandomly(home);
+		//return home;
+	//}
 
 	//public fishFood insertfishFood() {
 		//fishFood food = new fishFood(this);
@@ -201,6 +202,8 @@ public class World {
 		//return snail;
 	//}
 
+
+
 	/**
 	 * Determine if a WorldObject can swim to a particular point.
 	 * 
@@ -211,7 +214,7 @@ public class World {
 	 */
 	public boolean canSwim(WorldObject whoIsAsking, int x, int y) {
 		if (x < 0 || x >= width || y < 0 || y >= height) {
-			// trying to step outside
+			//trying to step outside
 			return false;
 		}
 
