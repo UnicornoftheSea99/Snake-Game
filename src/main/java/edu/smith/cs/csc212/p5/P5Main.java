@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 
+import javax.swing.JOptionPane;
 
 import me.jjfoley.gfx.GFX;
 import me.jjfoley.gfx.IntPoint;
@@ -52,6 +53,9 @@ public class P5Main extends GFX {
 		gameState.setFont(TextBox.BOLD_FONT);
 		gameState.setFontSize(TOP_PART / 3.0);
 		topRectangle = new Rectangle2D.Double(0, 0, getWidth(), TOP_PART);
+		
+		//Figured out how to get an option dialog window, might come in handy later
+		String name=JOptionPane.showInputDialog("Hello Player. What is your name?");
 	}
 
 	/**
@@ -185,7 +189,8 @@ public class P5Main extends GFX {
 				this.gameState.setString(
 						//"Time: " + game.stepsTaken + 
 						//" ... Fish Left: " + game.missingFishLeft() +
-						" Score: "+ game.score);
+						" Score: "+ game.score
+						);
 
 				// Read the state of the keyboard:
 				boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);

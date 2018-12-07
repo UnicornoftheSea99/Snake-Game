@@ -44,6 +44,7 @@ public class SnakeGame {
 
 	int z;
 	int u;
+	int highScore=0;
 
 	/**
 	 * Create a FishGame of a particular size.
@@ -56,13 +57,9 @@ public class SnakeGame {
 
 		missing = new ArrayList<SnakePart>();
 		found = new ArrayList<SnakePart>();
-		//home = world.insertFishHome();
-		//food = world.insertfishFood();
+		
 		z = 10;
 		u = 8;
-		//for (int i = 0; i < u; i++) {
-		//world.insertfishFood();
-		//}
 
 		// Make the player out of the 0th fish color.
 		player = new SnakeHead(world);
@@ -103,7 +100,10 @@ public class SnakeGame {
 			
 			return true;
 		}
-		
+		//mechanism to create high score
+		if (score>highScore) {
+			//score=highScore;
+		}
 		// if you collect all of the snake parts
 		return missing.isEmpty();
 	}
