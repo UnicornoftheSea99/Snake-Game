@@ -213,10 +213,7 @@ public class World {
 	 * @return true if they can move there.
 	 */
 	public boolean canSwim(WorldObject whoIsAsking, int x, int y) {
-		if (x < 0 || x >= width || y < 0 || y >= height) {
-			//trying to step outside
-			return false;
-		}
+
 
 		// This will be important.
 		boolean isPlayer = whoIsAsking.isPlayer();
