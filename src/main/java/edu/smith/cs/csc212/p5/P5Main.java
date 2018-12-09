@@ -165,7 +165,7 @@ public class P5Main extends GFX {
 			@Override
 			public void update(double secondsSinceLastUpdate) {
 				// Handle game-over and restart.
-				if (game.gameOver()) {
+				if (game.gameOverLOSE()) {
 					
 					this.gameState.setString("You Lose! Please try again!");
 					//"You win! Click anywhere start again!"
@@ -174,7 +174,7 @@ public class P5Main extends GFX {
 					}
 					return;
 				}
-				/**
+				
 				 if(game.gameOverWIN()) {
 					
 					this.gameState.setString("You win! Click anywhere start again!");
@@ -184,7 +184,7 @@ public class P5Main extends GFX {
 					}
 					return;
 				}
-				*/
+				
 				// Update the text in the TextBox.
 				this.gameState.setString(
 						//"Time: " + game.stepsTaken + 

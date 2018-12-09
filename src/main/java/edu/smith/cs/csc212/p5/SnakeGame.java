@@ -92,19 +92,26 @@ public class SnakeGame {
 	 * 
 	 * @return true if the player has won (or maybe lost?).
 	 */
-	public boolean gameOver() {
+	public boolean gameOverLOSE() {
 		
 		
 		if (player.getX() < 0 || player.getX() >= world.getWidth() || player.getY() < 0
 				|| player.getY() >= world.getHeight()) {
-			
+		
 			return true;
-		}
+		} return false;
+	
 		//mechanism to create high score
-		if (score>highScore) {
+		//if (score>highScore) {
 			//score=highScore;
-		}
+		//} 
+	
 		// if you collect all of the snake parts
+		//return missing.isEmpty();
+		
+	}
+		
+	public boolean gameOverWIN() {
 		return missing.isEmpty();
 	}
 
