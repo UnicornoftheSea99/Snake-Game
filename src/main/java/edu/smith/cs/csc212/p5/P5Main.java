@@ -159,23 +159,36 @@ public class P5Main extends GFX {
 
 	int delay = 0;
 
-	/**
-	 * We separate our "PlayFish" game logic update here.
-	 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is between each update, but we don't actually care here.
-	 */
-	@Override
-	public void update(double secondsSinceLastUpdate) {
-		// Handle game-over and restart.
-		if (game.gameOver()) {
 
-			this.gameState.setString("You Lose! Please try again!");
-			//"You win! Click anywhere start again!"
-			if (this.processClick() != null) {
-				this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
-			}
-			return;
-		}
-		/**
+		
+
+			/**
+			 * We separate our "PlayFish" game logic update here.
+			 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is between each update, but we don't actually care here.
+			 */
+			@Override
+			public void update(double secondsSinceLastUpdate) {
+				// Handle game-over and restart.
+				if (game.gameOverLOSE()) {
+					
+					this.gameState.setString("You Lose! Please try again!");
+					//"You win! Click anywhere start again!"
+					if (this.processClick() != null) {
+						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+					}
+					return;
+				}
+				
+				if (game.gameOverLOSE2()) {
+					
+					this.gameState.setString("You Lose! Please try again!");
+					//"You win! Click anywhere start again!"
+					if (this.processClick() != null) {
+						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+					}
+					return;
+				}
+
 				 if(game.gameOverWIN()) {
 
 					this.gameState.setString("You win! Click anywhere start again!");
@@ -185,13 +198,15 @@ public class P5Main extends GFX {
 					}
 					return;
 				}
-		 */
-		// Update the text in the TextBox.
-		this.gameState.setString(
-				//"Time: " + game.stepsTaken + 
-				//" ... Fish Left: " + game.missingFishLeft() +
-				" Score: "+ game.score
-				);
+
+				
+				// Update the text in the TextBox.
+				this.gameState.setString(
+						//"Time: " + game.stepsTaken + 
+						//" ... Fish Left: " + game.missingFishLeft() +
+						" Score: "+ game.score
+						);
+
 
 		// Read the state of the keyboard:
 		boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);

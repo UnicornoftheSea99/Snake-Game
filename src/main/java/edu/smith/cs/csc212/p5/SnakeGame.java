@@ -45,6 +45,7 @@ public class SnakeGame {
 	int z;
 	int u;
 	int highScore=0;
+	boolean gameOver1 = false;
 
 	/**
 	 * Create a FishGame of a particular size.
@@ -92,19 +93,36 @@ public class SnakeGame {
 	 * 
 	 * @return true if the player has won (or maybe lost?).
 	 */
-	public boolean gameOver() {
+	public boolean gameOverLOSE() {
 		
 		
 		if (player.getX() < 0 || player.getX() >= world.getWidth() || player.getY() < 0
 				|| player.getY() >= world.getHeight()) {
-			
+		
+			return true;
+		} return false;
+	
+		//mechanism to create high score
+		//if (score>highScore) {
+			//score=highScore;
+		//} 
+	
+		// if you collect all of the snake parts
+		//return missing.isEmpty();
+		
+	}
+	public boolean gameOverLOSE2() {
+		if (gameOver1 == false) {
+			//do nothing
+			return false;
+		}
+		else {
 			return true;
 		}
-		//mechanism to create high score
-		if (score>highScore) {
-			//score=highScore;
+		 
 		}
-		// if you collect all of the snake parts
+		
+	public boolean gameOverWIN() {
 		return missing.isEmpty();
 	}
 
@@ -137,7 +155,7 @@ public class SnakeGame {
 		// The player is there, too, let's skip them.
 		overlap.remove(this.player);
 
-		// If we find a fish, remove it from missing.
+		// If we find a snake, remove it from missing.
 		for (WorldObject wo : overlap) {
 			// It is missing if it's in our missing list.
 			if (missing.contains(wo)) {
@@ -153,6 +171,12 @@ public class SnakeGame {
 				// Increase score when you find a snake part!
 				score += 10;
 
+			} else if (found.contains(wo)) {
+				// you've just overlapped 
+				// game over!
+				gameOver1= true;
+				
+				
 			}
 			// Points for FishFood!
 			//If player comes across fish food, get 20 pts and fish food disappear from world
