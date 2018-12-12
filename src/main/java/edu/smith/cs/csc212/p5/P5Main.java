@@ -56,6 +56,7 @@ public class P5Main extends GFX {
 		
 		//Figured out how to get an option dialog window, might come in handy later
 		String name=JOptionPane.showInputDialog("Hello Player. What is your name?");
+		
 	}
 
 	/**
@@ -89,94 +90,94 @@ public class P5Main extends GFX {
 
 	public void draw(Graphics2D g) {
 		// Background of window is dark-dark green.
-				g.setColor(Color.green.darker().darker());
-				g.fillRect(0, 0, getWidth(), getHeight());
-				
-				// Get a a reference to the game world to draw.
-				World world = game.world;
+		g.setColor(Color.green.darker().darker());
+		g.fillRect(0, 0, getWidth(), getHeight());
 
-				// Draw TOP_PART TextBox.
-				this.gameState.centerInside(this.topRectangle);
-				this.gameState.draw(g);
+		// Get a a reference to the game world to draw.
+		World world = game.world;
 
-				// Slide the world down, and into the box.
-				// This makes our rendering of the board easier.
-				g.translate(BORDER, BORDER + TOP_PART);
+		// Draw TOP_PART TextBox.
+		this.gameState.centerInside(this.topRectangle);
+		this.gameState.draw(g);
 
-				// Use the tile-sizes.
-				int tw = getTileW();
-				int th = getTileH();
+		// Slide the world down, and into the box.
+		// This makes our rendering of the board easier.
+		g.translate(BORDER, BORDER + TOP_PART);
 
-				// Draw the ocean (not the whole screen).
-				g.setColor(BOARD_COLOR);
-				g.fillRect(0, 0, tw * world.getWidth(), th * world.getHeight());
-				// Draw a grid to better picture how the game works.
-				g.setColor(GRID_COLOR);
-				for (int x = 0; x < world.getWidth(); x++) {
-					for (int y = 0; y < world.getHeight(); y++) {
-						g.drawRect(x * tw, y * th, tw, th);
-					}
-				}
+		// Use the tile-sizes.
+		int tw = getTileW();
+		int th = getTileH();
 
-				// For everything in our world:
-				for (WorldObject wo : world.viewItems()) {
-					// Draw it with a 1x1 graphical world, with the center right in the middle of the tile.
-					// I fiddled with this translate to get pixel-perfect. Maybe there's a nicer way, but it works for now.
-
-					Graphics2D forWo = (Graphics2D) g.create();
-					forWo.translate((int) ((wo.getX() + 0.5) * tw) + 1, (int) ((wo.getY() + 0.5) * th) + 1);
-					forWo.scale(tw, th);
-					wo.draw(forWo);
-					forWo.dispose();
-				}
-				
-				IntPoint hover = mouseToGame(this.getMouseLocation());
-				if (hover != null) {
-					g.setColor(new Color(0,1,0,0.5f));
-					g.fillRect(hover.x * tw, hover.y * th, tw, th);
-				}
+		// Draw the ocean (not the whole screen).
+		g.setColor(BOARD_COLOR);
+		g.fillRect(0, 0, tw * world.getWidth(), th * world.getHeight());
+		// Draw a grid to better picture how the game works.
+		g.setColor(GRID_COLOR);
+		for (int x = 0; x < world.getWidth(); x++) {
+			for (int y = 0; y < world.getHeight(); y++) {
+				g.drawRect(x * tw, y * th, tw, th);
 			}
-			
-			/**
-			 * Convert Mouse coordinates to Grid coordinates.
-			 * @param mouse maybe a Mouse location (or null).
-			 * @return null or the grid coordinates of the Mouse.
-			 */
-			public IntPoint mouseToGame(IntPoint mouse) {
-				if (mouse == null) return null;
-				int x = mouse.x - BORDER;
-				int y = mouse.y - BORDER - TOP_PART;
-				if (x > 0 && x <= VISUAL_GRID_SIZE &&
-						y > 0 && y <= VISUAL_GRID_SIZE) {
-					int tx = x / getTileW();
-					int ty = y / getTileH();
-					return new IntPoint(tx, ty);
-				}
-				return null;
+		}
+
+		// For everything in our world:
+		for (WorldObject wo : world.viewItems()) {
+			// Draw it with a 1x1 graphical world, with the center right in the middle of the tile.
+			// I fiddled with this translate to get pixel-perfect. Maybe there's a nicer way, but it works for now.
+
+			Graphics2D forWo = (Graphics2D) g.create();
+			forWo.translate((int) ((wo.getX() + 0.5) * tw) + 1, (int) ((wo.getY() + 0.5) * th) + 1);
+			forWo.scale(tw, th);
+			wo.draw(forWo);
+			forWo.dispose();
+		}
+
+		IntPoint hover = mouseToGame(this.getMouseLocation());
+		if (hover != null) {
+			g.setColor(new Color(0,1,0,0.5f));
+			g.fillRect(hover.x * tw, hover.y * th, tw, th);
+		}
+	}
+
+	/**
+	 * Convert Mouse coordinates to Grid coordinates.
+	 * @param mouse maybe a Mouse location (or null).
+	 * @return null or the grid coordinates of the Mouse.
+	 */
+	public IntPoint mouseToGame(IntPoint mouse) {
+		if (mouse == null) return null;
+		int x = mouse.x - BORDER;
+		int y = mouse.y - BORDER - TOP_PART;
+		if (x > 0 && x <= VISUAL_GRID_SIZE &&
+				y > 0 && y <= VISUAL_GRID_SIZE) {
+			int tx = x / getTileW();
+			int ty = y / getTileH();
+			return new IntPoint(tx, ty);
+		}
+		return null;
+	}
+
+
+	int delay = 0;
+
+	/**
+	 * We separate our "PlayFish" game logic update here.
+	 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is between each update, but we don't actually care here.
+	 */
+	@Override
+	public void update(double secondsSinceLastUpdate) {
+		// Handle game-over and restart.
+		if (game.gameOver()) {
+
+			this.gameState.setString("You Lose! Please try again!");
+			//"You win! Click anywhere start again!"
+			if (this.processClick() != null) {
+				this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
 			}
-
-			
-			int delay = 0;
-
-			/**
-			 * We separate our "PlayFish" game logic update here.
-			 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is between each update, but we don't actually care here.
-			 */
-			@Override
-			public void update(double secondsSinceLastUpdate) {
-				// Handle game-over and restart.
-				if (game.gameOver()) {
-					
-					this.gameState.setString("You Lose! Please try again!");
-					//"You win! Click anywhere start again!"
-					if (this.processClick() != null) {
-						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
-					}
-					return;
-				}
-				/**
+			return;
+		}
+		/**
 				 if(game.gameOverWIN()) {
-					
+
 					this.gameState.setString("You win! Click anywhere start again!");
 					//"You win! Click anywhere start again!"
 					if (this.processClick() != null) {
@@ -184,51 +185,51 @@ public class P5Main extends GFX {
 					}
 					return;
 				}
-				*/
-				// Update the text in the TextBox.
-				this.gameState.setString(
-						//"Time: " + game.stepsTaken + 
-						//" ... Fish Left: " + game.missingFishLeft() +
-						" Score: "+ game.score
-						);
+		 */
+		// Update the text in the TextBox.
+		this.gameState.setString(
+				//"Time: " + game.stepsTaken + 
+				//" ... Fish Left: " + game.missingFishLeft() +
+				" Score: "+ game.score
+				);
 
-				// Read the state of the keyboard:
-				boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);
-				boolean down = this.processKey(KeyEvent.VK_S) || this.processKey(KeyEvent.VK_DOWN);
-				boolean left = this.processKey(KeyEvent.VK_A) || this.processKey(KeyEvent.VK_LEFT);
-				boolean right = this.processKey(KeyEvent.VK_D) || this.processKey(KeyEvent.VK_RIGHT);
-				boolean skip = this.processKey(KeyEvent.VK_SPACE);
+		// Read the state of the keyboard:
+		boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);
+		boolean down = this.processKey(KeyEvent.VK_S) || this.processKey(KeyEvent.VK_DOWN);
+		boolean left = this.processKey(KeyEvent.VK_A) || this.processKey(KeyEvent.VK_LEFT);
+		boolean right = this.processKey(KeyEvent.VK_D) || this.processKey(KeyEvent.VK_RIGHT);
+		boolean skip = this.processKey(KeyEvent.VK_SPACE);
 
-				// Move the player if we can:
-				boolean moved = false;
-				if (up) {
-					moved = this.game.player.moveUp();
-				} else if (down) {
-					moved = this.game.player.moveDown();
-				} else if (left) {
-					moved = this.game.player.moveLeft();
-				} else if (right) {
-					moved = this.game.player.moveRight();
-				}
-				
-				IntPoint click = mouseToGame(this.processClick());
-				
-				delay += 1;
-				// Only advance the game if the player presses something!
-				if (skip || moved || click != null || delay > 20) {
-					delay = 0;
-					if (click != null) {
-						this.game.click(click.x, click.y);
-					}
-					// Update game logic!
-					this.game.step(moved);
-					// Update message at the top!
-				}
+		// Move the player if we can:
+		boolean moved = false;
+		if (up) {
+			moved = this.game.player.moveUp();
+		} else if (down) {
+			moved = this.game.player.moveDown();
+		} else if (left) {
+			moved = this.game.player.moveLeft();
+		} else if (right) {
+			moved = this.game.player.moveRight();
+		}
+
+		IntPoint click = mouseToGame(this.processClick());
+
+		delay += 1;
+		// Only advance the game if the player presses something!
+		if (skip || moved || click != null || delay > 20) {
+			delay = 0;
+			if (click != null) {
+				this.game.click(click.x, click.y);
 			}
-  
+			// Update game logic!
+			this.game.step(moved);
+			// Update message at the top!
+		}
+	}
+
 	public static void main(String[] args) {
-    //System.out.println("P5 Main Started!");
-    GFX app = new P5Main();
-    app.start();
-  }
+		//System.out.println("P5 Main Started!");
+		GFX app = new P5Main();
+		app.start();
+	}
 }

@@ -179,30 +179,6 @@ public class World {
 		return f;
 	}
 
-	//public FishHome insertFishHome() {
-		//FishHome home = new FishHome(this);
-		//insertRandomly(home);
-		//return home;
-	//}
-
-	//public fishFood insertfishFood() {
-		//fishFood food = new fishFood(this);
-		//insertRandomly(food);
-		//return food;
-	//}
-
-	/**
-	 * Insert a new Snail at random into the world.
-	 * 
-	 * @return the snail!
-	 */
-	//public Snail insertSnailRandomly() {
-		//Snail snail = new Snail(this);
-		//insertRandomly(snail);
-		//return snail;
-	//}
-
-
 
 	/**
 	 * Determine if a WorldObject can swim to a particular point.
@@ -213,7 +189,6 @@ public class World {
 	 * @return true if they can move there.
 	 */
 	public boolean canSwim(WorldObject whoIsAsking, int x, int y) {
-
 
 		// This will be important.
 		boolean isPlayer = whoIsAsking.isPlayer();
