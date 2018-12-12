@@ -12,7 +12,6 @@ import me.jjfoley.gfx.IntPoint;
 
 /**
  * A WorldObject is an abstract "item" in the game.
- * Fish, the player, rocks, and the Snail are all WorldObject subclasses.
  * 
  * All movement is defined in this class.
  * 
@@ -36,9 +35,9 @@ public abstract class WorldObject {
 	 */
 	protected World world;
 	/**
-	 * How many fish do we anticipate having? This is used to make them follow you.
+	 * How many snake parts do we anticipate having? This is used to make them follow you.
 	 */
-	public static int NUM_RECENT_POSITIONS = 64;
+	public static int NUM_RECENT_POSITIONS = 256;
 	/**
 	 * Here, we use a special kind of list that makes it easy to add to the front
 	 * and remove from the back, so we keep up to NUM_RECENT_POSITIONS locations for every fish.
@@ -113,9 +112,9 @@ public abstract class WorldObject {
 	}
 
 	/**
-	 * Is this a fish?
+	 * Is this a snake?
 	 * 
-	 * @return true if this is a Fish.
+	 * @return true if this is a Snake.
 	 */
 	public boolean isFish() {
 		return this instanceof SnakeHead;
@@ -124,7 +123,7 @@ public abstract class WorldObject {
 	/**
 	 * Is this the player?
 	 * 
-	 * @return true if this is a Fish that is the player.
+	 * @return true if this is a Snake that is the player.
 	 */
 	public boolean isPlayer() {
 		return this instanceof SnakeHead;
@@ -265,7 +264,7 @@ public abstract class WorldObject {
 	/**
 	 * Draw this WorldObject!
 	 * 
-	 * Abstract so that Fish and other subclasses MUST implement.
+	 * Abstract so that Snake and other subclasses MUST implement.
 	 * 
 	 * @param g Graphics2D API.
 	 */
@@ -274,7 +273,7 @@ public abstract class WorldObject {
 	/**
 	 * Step this WorldObject!
 	 * 
-	 * Abstract so that Fish and Rock, etc. MUST implement!
+	 * Abstract so that Snake and Powerup, etc. MUST implement!
 	 */
 	public abstract void step();
 }

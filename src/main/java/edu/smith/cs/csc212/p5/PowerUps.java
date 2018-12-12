@@ -14,18 +14,16 @@ public class PowerUps extends WorldObject{
 		super(world);
 	}
 
-	//Create Fish Food
+	//Create PowerUps
 	@Override
 	public void draw(Graphics2D g) {
-		Shape food = new Ellipse2D.Double(0, 0, 0.25, 0.25);
-		//Shape powerup = new Rectangle2D.Double(0.75, 0.75, 0.5, 0.5);
+		Shape powerup = new Rectangle2D.Double(-0.25, -0.25, 0.5, 0.5);
 		g.setColor(Color.YELLOW);
-		g.fill(food);
+		g.fill(powerup);
 	
 	}
 	
-
-	//Fish food doesn't move
+	//PowerUps don't move
 	@Override
 	public void step() {
 	}

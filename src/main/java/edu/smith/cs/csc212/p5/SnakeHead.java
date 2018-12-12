@@ -40,7 +40,6 @@ public class SnakeHead extends WorldObject {
 		if (dt > 100) {
 			dt = 0;
 		}
-		//Shape circle = new Ellipse2D.Double(-0.6, -0.6, 1.2, 1.2);
 	
 		Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
 		Shape eyeL = new Ellipse2D.Double(-.2, -.05, .15, .15);

@@ -28,7 +28,7 @@ public class P5Main extends GFX {
 	/**
 	 * The words appear in the top part of the screen.
 	 */
-	public static int TOP_PART = 50;
+	public static int TOP_PART = 100;
 	/**
 	 * There's a border to make it look pretty (the board is inset by this much).
 	 */
@@ -46,6 +46,9 @@ public class P5Main extends GFX {
 	 */
 	Rectangle2D topRectangle;
 	
+	int highScore = 0;
+	String name;
+	
 	public P5Main() {
 		super(VISUAL_GRID_SIZE + BORDER * 2, VISUAL_GRID_SIZE + BORDER * 2 + TOP_PART);
 		game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
@@ -55,7 +58,7 @@ public class P5Main extends GFX {
 		topRectangle = new Rectangle2D.Double(0, 0, getWidth(), TOP_PART);
 		
 		//Figured out how to get an option dialog window, might come in handy later
-		String name=JOptionPane.showInputDialog("Hello Player. What is your name?");
+		name=JOptionPane.showInputDialog("Hello Player. What is your name?");
 		
 	}
 
@@ -83,12 +86,21 @@ public class P5Main extends GFX {
 	 * White grid
 	 */
 	public static Color GRID_COLOR = new Color(255, 255, 225);
+	
+	boolean inMenu = true;
 
 	/**
 	 * Draw the game state.
 	 */
 
 	public void draw(Graphics2D g) {
+		if (inMenu) {
+			// drawMenu(g);
+			this.gameState.setString("Hello "+name);
+			this.gameState.centerInside(topRectangle);
+			this.gameState.draw(g);
+			return;
+		}
 		// Background of window is dark-dark green.
 		g.setColor(Color.green.darker().darker());
 		g.fillRect(0, 0, getWidth(), getHeight());
@@ -168,13 +180,23 @@ public class P5Main extends GFX {
 			 */
 			@Override
 			public void update(double secondsSinceLastUpdate) {
+				if (inMenu) {
+					if (this.processClick() != null) {
+						inMenu = false;
+						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+					}
+					return;
+				}
+				if (game.score > highScore) {
+					highScore = game.score;
+				}
 				// Handle game-over and restart.
 				if (game.gameOverLOSE()) {
 					
 					this.gameState.setString("You Lose! Please try again!");
 					//"You win! Click anywhere start again!"
 					if (this.processClick() != null) {
-						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+						this.inMenu = true;
 					}
 					return;
 				}
@@ -184,7 +206,7 @@ public class P5Main extends GFX {
 					this.gameState.setString("You Lose! Please try again!");
 					//"You win! Click anywhere start again!"
 					if (this.processClick() != null) {
-						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+						this.inMenu = true;
 					}
 					return;
 				}
@@ -194,7 +216,7 @@ public class P5Main extends GFX {
 					this.gameState.setString("You win! Click anywhere start again!");
 					//"You win! Click anywhere start again!"
 					if (this.processClick() != null) {
-						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+						this.inMenu = true;
 					}
 					return;
 				}
@@ -204,7 +226,7 @@ public class P5Main extends GFX {
 				this.gameState.setString(
 						//"Time: " + game.stepsTaken + 
 						//" ... Fish Left: " + game.missingFishLeft() +
-						" Score: "+ game.score
+						" Score: "+ game.score + " High Score: "+highScore + "Hello" +name
 						);
 
 

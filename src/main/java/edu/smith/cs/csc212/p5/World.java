@@ -155,19 +155,9 @@ public class World {
 		item.checkFindMyself();
 	}
 
-	/**
-	 * Insert a new Rock into the world at random.
-	 * 
-	 * @return the Rock.
-	 */
-	//public Rock insertRockRandomly() {
-		//Rock r = new Rock(this);
-		//insertRandomly(r);
-		//return r;
-	//}
 
 	/**
-	 * Insert a new Fish into the world at random of a specific color.
+	 * Insert a new Snake Part into the world at random of a specific color.
 	 * 
 	 * @param color - the color of the fish.
 	 * @return the new fish itself.
@@ -197,19 +187,6 @@ public class World {
 		// there.
 		List<WorldObject> inSpot = this.find(x, y);
 
-		//for (WorldObject it : inSpot) {
-			//if (it instanceof Rock) {
-				//return false;
-			//}
-
-			// The other fish shouldn't step "on" the player, the player should step on the
-			// other fish.
-			//if (it instanceof Snail) {
-				// This if-statement doesn't let anyone step on the Snail.
-				// The Snail(s) are not gonna take it.
-				//return false;
-			//}
-		//}
 
 		// If we didn't see an obstacle, we can move there!
 		return true;
@@ -236,23 +213,6 @@ public class World {
 		if (followers.isEmpty() || target.recentPositions.isEmpty()) {
 			return;
 		}
-		// What is recentPositions?
-		// recentPositions is the place where the wandering fish
-		// go after they have been found. For example,
-		// the first found fish will go behind the red target fish
-		// and then the next found fish will go behind the
-		// the previous found fish.
-		// What is followers?
-		// The followers are the wandering fish that have been
-		// found by the target.
-		// What is target?
-		// The target is the red fish that is collecting all of the missing fish.
-		// Why is past = putWhere[i+1]? Why not putWhere[i]?
-		// You need put past = putWhere[i+1] because then the missing fish will
-		// follow the target fish. The i + 1 acts similar to the next space over.
-		// If putWhere is [i], the first fish that is found will place itself over
-		// the target fish. We do not want that because we still need to see the
-		// target fish as it collects the remaining missing fish.
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
 		IntPoint last = putWhere.get(putWhere.size()-1);
 		for (int i = 0; i < followers.size(); i++) {

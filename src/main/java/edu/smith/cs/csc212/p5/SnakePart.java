@@ -24,26 +24,21 @@ public class SnakePart extends WorldObject {
 
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
-		//Shape circle = new Ellipse2D.Double(-0.6, -0.6, 1.2, 1.2);
-		
-			Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
-			//Shape body = new drawRect(int x, int y, int width, int height); 
-			//Shape tail = new Ellipse2D.Double(+.2, -.3, .2, .6);
-			Shape body2 = new Ellipse2D.Double(-.25, -.25, .5, .5);
 
-			Color color = COLORS[this.color];
-			//Color tailColor = color.darker();
+		Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
+		Shape body2 = new Ellipse2D.Double(-.25, -.25, .5, .5);
 
-			Graphics2D flipped = (Graphics2D) g.create();
+		Color color = COLORS[this.color];
 
-			// Draw the fish of size (1x1, roughly, at 0,0).
-			flipped.setColor(color);
-			flipped.fill(body);
-			flipped.setColor(Color.black);
-			flipped.fill(body2);
+		Graphics2D flipped = (Graphics2D) g.create();
 
-			flipped.dispose();
+		// Draw the fish of size (1x1, roughly, at 0,0).
+		flipped.setColor(color);
+		flipped.fill(body);
+		flipped.setColor(Color.black);
+		flipped.fill(body2);
+
+		flipped.dispose();
 
 	}
 

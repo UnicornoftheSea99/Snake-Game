@@ -58,14 +58,12 @@ public class SnakeGame {
 
 		missing = new ArrayList<SnakePart>();
 		found = new ArrayList<SnakePart>();
-		
+
 		z = 10;
 		u = 8;
 
 		// Make the player out of the 0th fish color.
 		player = new SnakeHead(world);
-		// Start the player at "home".
-		//player.setPosition(home.getX(), home.getY());
 		world.register(player);
 
 		// Generate fish of all the colors but the first into the "missing" List.
@@ -94,22 +92,18 @@ public class SnakeGame {
 	 * @return true if the player has won (or maybe lost?).
 	 */
 	public boolean gameOverLOSE() {
-		
-		
+
+
 		if (player.getX() < 0 || player.getX() >= world.getWidth() || player.getY() < 0
 				|| player.getY() >= world.getHeight()) {
-		
+
 			return true;
 		} return false;
-	
-		//mechanism to create high score
-		//if (score>highScore) {
-			//score=highScore;
-		//} 
-	
+
+
 		// if you collect all of the snake parts
 		//return missing.isEmpty();
-		
+
 	}
 	public boolean gameOverLOSE2() {
 		if (gameOver1 == false) {
@@ -119,9 +113,9 @@ public class SnakeGame {
 		else {
 			return true;
 		}
-		 
-		}
-		
+
+	}
+
 	public boolean gameOverWIN() {
 		return missing.isEmpty();
 	}
@@ -131,9 +125,7 @@ public class SnakeGame {
 	 * @param moved 
 	 */
 	public void step(boolean moved) {
-		if (!moved) {
-			// TODO step the snake forward
-		}
+
 		// Keep track of how long the game has run.
 		this.stepsTaken += 1;
 
@@ -162,46 +154,32 @@ public class SnakeGame {
 				// Remove this fish from the missing list.
 				missing.remove(wo);
 
-				// Tell it to be found instead.
-
-				// found.add((Fish)wo);
 				SnakePart justFound = (SnakePart) wo;
 				found.add(justFound);
 
 				// Increase score when you find a snake part!
 				score += 10;
 
-			} else if (found.contains(wo)) {
-				// you've just overlapped 
+			} else if (found.contains(wo) && this.player.recentPositions.size() > found.size()) {
+				// you've just overlapped and player has already moved
 				// game over!
 				gameOver1= true;
-				
-				
+
+
 			}
-			// Points for FishFood!
-			//If player comes across fish food, get 20 pts and fish food disappear from world
+			// Points for Powerups
+			//If player comes across powerups, get 20 pts and fish food disappear from world
 			if (wo instanceof PowerUps) {
 				score += 20;
 				world.remove(wo);
 			}
 		}
 
-		// Make sure missing fish *do* something.
-		//wanderMissingFish();
-		// When fish get added to "found" they will follow the player around.
+		// When snake part get added to "found" they will follow the player around.
 		World.objectsFollow(player, found);
 		// Step any world-objects that run themselves.
 		world.stepAll();
 	}
-
-	/**
-	 * Call moveRandomly() on all of the missing fish to make them seem alive.
-	 */
-	//	private void wanderMissingFish() {
-	//		Random rand = ThreadLocalRandom.current();
-	//		check what kind of fish it is normal or fast scared
-	//
-	//	}
 
 	/**
 	 * This gets a click on the grid. We want it to destroy rocks that ruin the
@@ -215,17 +193,3 @@ public class SnakeGame {
 	}
 
 }
-
-//public enum TTTState {
-//	Player1Turn, // 0
-//	Player2Turn, // 1
-//	Tie,         // 2
-//	Player1Win,  // 3
-//	Player2Win   // 4
-//	;
-//	
-//	public boolean isPlaying() {
-//		return this == Player1Turn || this == Player2Turn;
-//	}
-//}
-
