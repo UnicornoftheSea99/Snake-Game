@@ -1,9 +1,12 @@
 package edu.smith.cs.csc212.p5;
 
 import java.awt.Color;
-
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.JOptionPane;
@@ -41,10 +44,13 @@ public class P5Main extends GFX {
 	 * This TextBox wraps up making fonts and centering text.
 	 */
 	TextBox gameState = new TextBox("");
+
 	/**
 	 * This is a rectangle representing the TOP_PART of the screen.
 	 */
 	Rectangle2D topRectangle;
+	Rectangle2D secRectangle;
+	Rectangle2D lowRectangle;
 	
 	int highScore = 0;
 	String name;
@@ -56,6 +62,8 @@ public class P5Main extends GFX {
 		gameState.setFont(TextBox.BOLD_FONT);
 		gameState.setFontSize(TOP_PART / 3.0);
 		topRectangle = new Rectangle2D.Double(0, 0, getWidth(), TOP_PART);
+		secRectangle= new Rectangle2D.Double(0,50, getWidth(),TOP_PART);
+		lowRectangle= new Rectangle2D.Double(0,550,getWidth(),TOP_PART);
 		
 		//Figured out how to get an option dialog window, might come in handy later
 		name=JOptionPane.showInputDialog("Hello Player. What is your name?");
@@ -95,10 +103,76 @@ public class P5Main extends GFX {
 
 	public void draw(Graphics2D g) {
 		if (inMenu) {
-			// drawMenu(g);
+			// Strings
 			this.gameState.setString("Hello "+name);
-			this.gameState.centerInside(topRectangle);
+			this.gameState.centerInside(secRectangle);
+			this.gameState.setFontSize(16);
 			this.gameState.draw(g);
+			this.gameState.setString("SNAKE GAME");
+			this.gameState.setFont(TextBox.BOLD_FONT);
+			this.gameState.centerInside(topRectangle);
+			this.gameState.setFontSize(40);
+			this.gameState.draw(g);
+			this.gameState.setString("Click anywhere to start");
+			this.gameState.centerInside(lowRectangle);
+			this.gameState.setFontSize(16);
+			this.gameState.draw(g);
+			
+			//Snake 
+			Shape body = new Ellipse2D.Double(20, 40, 100, 100);
+			Shape eyeLW = new Ellipse2D.Double(30, 70, 35, 35);
+			Shape eyeL = new Ellipse2D.Double(35, 70, 20, 20);
+			Shape eyeRW = new Ellipse2D.Double(80,70,35,35);
+			Shape eyeR = new Ellipse2D.Double(85, 70, 20, 20);
+			Shape body1= new Ellipse2D.Double(20, 155, 100, 100);
+			Shape body1b= new Ellipse2D.Double(34, 170, 70, 70);
+			Shape body2=new Ellipse2D.Double(20, 270, 100, 100);
+			Shape body2b=new Ellipse2D.Double(35, 285, 70, 70);
+			Shape body3=new Ellipse2D.Double(135, 270, 100, 100);
+			Shape body3b=new Ellipse2D.Double(150, 285, 70, 70);
+			Shape body4=new Ellipse2D.Double(250, 270, 100, 100);
+			Shape body4b=new Ellipse2D.Double(265, 285, 70, 70);
+			Shape body5=new Ellipse2D.Double(250, 380, 100, 100);
+			Shape body5b=new Ellipse2D.Double(265, 395, 70, 70);
+			Shape body6=new Ellipse2D.Double(250, 495, 100, 100);
+			Shape body6b=new Ellipse2D.Double(265, 510, 70, 70);
+			Shape body7=new Ellipse2D.Double(365, 495, 100, 100);
+			Shape body7b=new Ellipse2D.Double(380, 510, 70, 70);
+			
+			Color color = Color.red;
+			Graphics2D flipped = (Graphics2D) g.create();
+			flipped.setColor(color);
+			flipped.fill(body);
+			flipped.setColor(Color.WHITE);
+			flipped.fill(eyeLW);
+			flipped.fill(eyeRW);
+			
+			flipped.setColor(Color.CYAN);
+			flipped.fill(body1);
+			flipped.setColor(Color.ORANGE);
+			flipped.fill(body2);
+			flipped.setColor(Color.green);
+			flipped.fill(body3);
+			flipped.setColor(Color.MAGENTA);
+			flipped.fill(body4);
+			flipped.setColor(Color.WHITE);
+			flipped.fill(body5);
+			flipped.setColor(Color.PINK);
+			flipped.fill(body6);
+			flipped.setColor(Color.blue);
+			flipped.fill(body7);
+			
+			flipped.setColor(Color.black);
+			flipped.fill(eyeL);
+			flipped.fill(eyeR);
+			flipped.fill(body2b);
+			flipped.fill(body1b);
+			flipped.fill(body3b);
+			flipped.fill(body4b);
+			flipped.fill(body5b);
+			flipped.fill(body6b);
+			flipped.fill(body7b);
+			
 			return;
 		}
 		// Background of window is dark-dark green.
@@ -226,7 +300,7 @@ public class P5Main extends GFX {
 				this.gameState.setString(
 						//"Time: " + game.stepsTaken + 
 						//" ... Fish Left: " + game.missingFishLeft() +
-						" Score: "+ game.score + " High Score: "+highScore + "Hello" +name
+						" Score: "+ game.score + " | High Score: "+highScore 
 						);
 
 
