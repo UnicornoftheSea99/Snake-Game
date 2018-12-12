@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import me.jjfoley.gfx.GFX;
 import me.jjfoley.gfx.IntPoint;
 import me.jjfoley.gfx.TextBox;
+
 /***
  * This is a snake game uses the implementation of P2 (the fish game)
  * 
@@ -51,10 +52,10 @@ public class P5Main extends GFX {
 	Rectangle2D topRectangle;
 	Rectangle2D secRectangle;
 	Rectangle2D lowRectangle;
-	
+
 	int highScore = 0;
 	String name;
-	
+
 	public P5Main() {
 		super(VISUAL_GRID_SIZE + BORDER * 2, VISUAL_GRID_SIZE + BORDER * 2 + TOP_PART);
 		game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
@@ -62,16 +63,17 @@ public class P5Main extends GFX {
 		gameState.setFont(TextBox.BOLD_FONT);
 		gameState.setFontSize(TOP_PART / 3.0);
 		topRectangle = new Rectangle2D.Double(0, 0, getWidth(), TOP_PART);
-		secRectangle= new Rectangle2D.Double(0,50, getWidth(),TOP_PART);
-		lowRectangle= new Rectangle2D.Double(0,550,getWidth(),TOP_PART);
-		
-		//Figured out how to get an option dialog window, might come in handy later
-		name=JOptionPane.showInputDialog("Hello Player. What is your name?");
-		
+		secRectangle = new Rectangle2D.Double(0, 50, getWidth(), TOP_PART);
+		lowRectangle = new Rectangle2D.Double(0, 550, getWidth(), TOP_PART);
+
+		// Figured out how to get an option dialog window, might come in handy later
+		name = JOptionPane.showInputDialog("Hello Player. What is your name?");
+
 	}
 
 	/**
 	 * How big is a tile?
+	 * 
 	 * @return this returns the tile width.
 	 */
 	private int getTileW() {
@@ -80,6 +82,7 @@ public class P5Main extends GFX {
 
 	/**
 	 * How big is a tile?
+	 * 
 	 * @return this returns the tile height.
 	 */
 	private int getTileH() {
@@ -94,7 +97,7 @@ public class P5Main extends GFX {
 	 * White grid
 	 */
 	public static Color GRID_COLOR = new Color(255, 255, 225);
-	
+
 	boolean inMenu = true;
 
 	/**
@@ -104,7 +107,7 @@ public class P5Main extends GFX {
 	public void draw(Graphics2D g) {
 		if (inMenu) {
 			// Strings
-			this.gameState.setString("Hello "+name);
+			this.gameState.setString("Hello " + name);
 			this.gameState.centerInside(secRectangle);
 			this.gameState.setFontSize(16);
 			this.gameState.draw(g);
@@ -117,28 +120,28 @@ public class P5Main extends GFX {
 			this.gameState.centerInside(lowRectangle);
 			this.gameState.setFontSize(16);
 			this.gameState.draw(g);
-			
-			//Snake 
+
+			// Snake
 			Shape body = new Ellipse2D.Double(20, 40, 100, 100);
 			Shape eyeLW = new Ellipse2D.Double(30, 70, 35, 35);
 			Shape eyeL = new Ellipse2D.Double(35, 70, 20, 20);
-			Shape eyeRW = new Ellipse2D.Double(80,70,35,35);
+			Shape eyeRW = new Ellipse2D.Double(80, 70, 35, 35);
 			Shape eyeR = new Ellipse2D.Double(85, 70, 20, 20);
-			Shape body1= new Ellipse2D.Double(20, 155, 100, 100);
-			Shape body1b= new Ellipse2D.Double(34, 170, 70, 70);
-			Shape body2=new Ellipse2D.Double(20, 270, 100, 100);
-			Shape body2b=new Ellipse2D.Double(35, 285, 70, 70);
-			Shape body3=new Ellipse2D.Double(135, 270, 100, 100);
-			Shape body3b=new Ellipse2D.Double(150, 285, 70, 70);
-			Shape body4=new Ellipse2D.Double(250, 270, 100, 100);
-			Shape body4b=new Ellipse2D.Double(265, 285, 70, 70);
-			Shape body5=new Ellipse2D.Double(250, 380, 100, 100);
-			Shape body5b=new Ellipse2D.Double(265, 395, 70, 70);
-			Shape body6=new Ellipse2D.Double(250, 495, 100, 100);
-			Shape body6b=new Ellipse2D.Double(265, 510, 70, 70);
-			Shape body7=new Ellipse2D.Double(365, 495, 100, 100);
-			Shape body7b=new Ellipse2D.Double(380, 510, 70, 70);
-			
+			Shape body1 = new Ellipse2D.Double(20, 155, 100, 100);
+			Shape body1b = new Ellipse2D.Double(34, 170, 70, 70);
+			Shape body2 = new Ellipse2D.Double(20, 270, 100, 100);
+			Shape body2b = new Ellipse2D.Double(35, 285, 70, 70);
+			Shape body3 = new Ellipse2D.Double(135, 270, 100, 100);
+			Shape body3b = new Ellipse2D.Double(150, 285, 70, 70);
+			Shape body4 = new Ellipse2D.Double(250, 270, 100, 100);
+			Shape body4b = new Ellipse2D.Double(265, 285, 70, 70);
+			Shape body5 = new Ellipse2D.Double(250, 380, 100, 100);
+			Shape body5b = new Ellipse2D.Double(265, 395, 70, 70);
+			Shape body6 = new Ellipse2D.Double(250, 495, 100, 100);
+			Shape body6b = new Ellipse2D.Double(265, 510, 70, 70);
+			Shape body7 = new Ellipse2D.Double(365, 495, 100, 100);
+			Shape body7b = new Ellipse2D.Double(380, 510, 70, 70);
+
 			Color color = Color.red;
 			Graphics2D flipped = (Graphics2D) g.create();
 			flipped.setColor(color);
@@ -146,7 +149,7 @@ public class P5Main extends GFX {
 			flipped.setColor(Color.WHITE);
 			flipped.fill(eyeLW);
 			flipped.fill(eyeRW);
-			
+
 			flipped.setColor(Color.CYAN);
 			flipped.fill(body1);
 			flipped.setColor(Color.ORANGE);
@@ -161,7 +164,7 @@ public class P5Main extends GFX {
 			flipped.fill(body6);
 			flipped.setColor(Color.blue);
 			flipped.fill(body7);
-			
+
 			flipped.setColor(Color.black);
 			flipped.fill(eyeL);
 			flipped.fill(eyeR);
@@ -172,7 +175,7 @@ public class P5Main extends GFX {
 			flipped.fill(body5b);
 			flipped.fill(body6b);
 			flipped.fill(body7b);
-			
+
 			return;
 		}
 		// Background of window is dark-dark green.
@@ -194,7 +197,7 @@ public class P5Main extends GFX {
 		int tw = getTileW();
 		int th = getTileH();
 
-		// Draw the ocean (not the whole screen).
+		// Draw the board (not the whole screen).
 		g.setColor(BOARD_COLOR);
 		g.fillRect(0, 0, tw * world.getWidth(), th * world.getHeight());
 		// Draw a grid to better picture how the game works.
@@ -207,9 +210,9 @@ public class P5Main extends GFX {
 
 		// For everything in our world:
 		for (WorldObject wo : world.viewItems()) {
-			// Draw it with a 1x1 graphical world, with the center right in the middle of the tile.
-			// I fiddled with this translate to get pixel-perfect. Maybe there's a nicer way, but it works for now.
-
+			// Draw it with a 1x1 graphical world, with the center right in the middle of
+			// the tile.
+			// I fiddled with this translate to get pixel-perfect.
 			Graphics2D forWo = (Graphics2D) g.create();
 			forWo.translate((int) ((wo.getX() + 0.5) * tw) + 1, (int) ((wo.getY() + 0.5) * th) + 1);
 			forWo.scale(tw, th);
@@ -219,22 +222,23 @@ public class P5Main extends GFX {
 
 		IntPoint hover = mouseToGame(this.getMouseLocation());
 		if (hover != null) {
-			g.setColor(new Color(0,1,0,0.5f));
+			g.setColor(new Color(0, 1, 0, 0.5f));
 			g.fillRect(hover.x * tw, hover.y * th, tw, th);
 		}
 	}
 
 	/**
 	 * Convert Mouse coordinates to Grid coordinates.
+	 * 
 	 * @param mouse maybe a Mouse location (or null).
 	 * @return null or the grid coordinates of the Mouse.
 	 */
 	public IntPoint mouseToGame(IntPoint mouse) {
-		if (mouse == null) return null;
+		if (mouse == null)
+			return null;
 		int x = mouse.x - BORDER;
 		int y = mouse.y - BORDER - TOP_PART;
-		if (x > 0 && x <= VISUAL_GRID_SIZE &&
-				y > 0 && y <= VISUAL_GRID_SIZE) {
+		if (x > 0 && x <= VISUAL_GRID_SIZE && y > 0 && y <= VISUAL_GRID_SIZE) {
 			int tx = x / getTileW();
 			int ty = y / getTileH();
 			return new IntPoint(tx, ty);
@@ -242,67 +246,57 @@ public class P5Main extends GFX {
 		return null;
 	}
 
-
 	int delay = 0;
 
+	/**
+	 * We separate our "PlayFish" game logic update here.
+	 * 
+	 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is
+	 *                               between each update, but we don't actually care
+	 *                               here.
+	 */
+	@Override
+	public void update(double secondsSinceLastUpdate) {
+		if (inMenu) {
+			if (this.processClick() != null) {
+				inMenu = false;
+				this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+			}
+			return;
+		}
+		if (game.score > highScore) {
+			highScore = game.score;
+		}
+		// Handle game-over and restart.
+		if (game.gameOverLOSE()) {
 
-		
+			this.gameState.setString("You Lose! Please try again!");
+			if (this.processClick() != null) {
+				this.inMenu = true;
+			}
+			return;
+		}
 
-			/**
-			 * We separate our "PlayFish" game logic update here.
-			 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is between each update, but we don't actually care here.
-			 */
-			@Override
-			public void update(double secondsSinceLastUpdate) {
-				if (inMenu) {
-					if (this.processClick() != null) {
-						inMenu = false;
-						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
-					}
-					return;
-				}
-				if (game.score > highScore) {
-					highScore = game.score;
-				}
-				// Handle game-over and restart.
-				if (game.gameOverLOSE()) {
-					
-					this.gameState.setString("You Lose! Please try again!");
-					//"You win! Click anywhere start again!"
-					if (this.processClick() != null) {
-						this.inMenu = true;
-					}
-					return;
-				}
-				
-				if (game.gameOverLOSE2()) {
-					
-					this.gameState.setString("You Lose! Please try again!");
-					//"You win! Click anywhere start again!"
-					if (this.processClick() != null) {
-						this.inMenu = true;
-					}
-					return;
-				}
+		if (game.gameOverLOSE2()) {
 
-				 if(game.gameOverWIN()) {
+			this.gameState.setString("You Lose! Please try again!");
+			if (this.processClick() != null) {
+				this.inMenu = true;
+			}
+			return;
+		}
 
-					this.gameState.setString("You win! Click anywhere start again!");
-					//"You win! Click anywhere start again!"
-					if (this.processClick() != null) {
-						this.inMenu = true;
-					}
-					return;
-				}
+		if (game.gameOverWIN()) {
 
-				
-				// Update the text in the TextBox.
-				this.gameState.setString(
-						//"Time: " + game.stepsTaken + 
-						//" ... Fish Left: " + game.missingFishLeft() +
-						" Score: "+ game.score + " | High Score: "+highScore 
-						);
+			this.gameState.setString("You win! Click anywhere start again!");
+			if (this.processClick() != null) {
+				this.inMenu = true;
+			}
+			return;
+		}
 
+		// Update the text in the TextBox.
+		this.gameState.setString(" Score: " + game.score + " | High Score: " + highScore);
 
 		// Read the state of the keyboard:
 		boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);
@@ -339,7 +333,7 @@ public class P5Main extends GFX {
 	}
 
 	public static void main(String[] args) {
-		//System.out.println("P5 Main Started!");
+
 		GFX app = new P5Main();
 		app.start();
 	}

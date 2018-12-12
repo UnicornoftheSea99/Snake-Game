@@ -10,21 +10,21 @@ public class SnakeGame {
 
 	Random rand = ThreadLocalRandom.current(); 
 	/**
-	 * This is the world in which the fish are missing. (It's mostly a List!).
+	 * This is the world in which the snake head has to find its parts. (It's mostly a List!).
 	 */
 	World world;
 	/**
-	 * The player (a Fish.COLORS[0]-colored fish) goes seeking their friends.
+	 * The player goes seeking for its body parts
 	 */
 	SnakeHead player;
 
 	/**
-	 * These are the missing fish!
+	 * These are the missing parts!
 	 */
 	List<SnakePart> missing;
 
 	/**
-	 * These are fish we've found!
+	 * These are parts we've found!
 	 */
 	List<SnakePart> found;
 
@@ -32,8 +32,6 @@ public class SnakeGame {
 	 * Number of steps!
 	 */
 	int stepsTaken;
-
-	//fishFood food;
 
 	PowerUps powerup;
 
@@ -48,10 +46,8 @@ public class SnakeGame {
 	boolean gameOver1 = false;
 
 	/**
-	 * Create a FishGame of a particular size.
+	 * Create a SnakeGame of a particular size.
 	 * 
-	 * @param w how wide is the grid?
-	 * @param h how tall is the grid?
 	 */
 	public SnakeGame(int w, int h) {
 		world = new World(w, h);
@@ -66,7 +62,7 @@ public class SnakeGame {
 		player = new SnakeHead(world);
 		world.register(player);
 
-		// Generate fish of all the colors but the first into the "missing" List.
+		// Generate snake parts of all the colors but the first into the "missing" List.
 		for (int ft = 1; ft < SnakePart.COLORS.length; ft++) {
 			SnakePart friend = world.insertSnakePartRandomly(ft);
 			missing.add(friend);
@@ -78,7 +74,7 @@ public class SnakeGame {
 	}
 
 	/**
-	 * How we tell if the game is over: if missingFishLeft() == 0.
+	 * How you win: if missingFishLeft() == 0.
 	 * 
 	 * @return the size of the missing list.
 	 */
@@ -87,7 +83,7 @@ public class SnakeGame {
 	}
 
 	/**
-	 * This method is how the PlayFish app tells whether we're done.
+	 * This method is how the P5 app tells whether we're done.
 	 * 
 	 * @return true if the player has won (or maybe lost?).
 	 */
@@ -161,7 +157,7 @@ public class SnakeGame {
 				score += 10;
 
 			} else if (found.contains(wo) && this.player.recentPositions.size() > found.size()) {
-				// you've just overlapped and player has already moved
+				// you've just overlapped 
 				// game over!
 				gameOver1= true;
 
