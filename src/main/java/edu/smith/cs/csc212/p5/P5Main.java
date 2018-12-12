@@ -175,6 +175,15 @@ public class P5Main extends GFX {
 					return;
 				}
 				
+				if (game.gameOverLOSE2()) {
+					
+					this.gameState.setString("You Lose! Please try again!");
+					//"You win! Click anywhere start again!"
+					if (this.processClick() != null) {
+						this.game = new SnakeGame(LOGICAL_GRID_SIZE, LOGICAL_GRID_SIZE);
+					}
+					return;
+				}
 				 if(game.gameOverWIN()) {
 					
 					this.gameState.setString("You win! Click anywhere start again!");
