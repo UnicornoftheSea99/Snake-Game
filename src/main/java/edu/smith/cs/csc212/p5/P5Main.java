@@ -33,7 +33,7 @@ public class P5Main extends GFX {
 	/**
 	 * The words appear in the top part of the screen.
 	 */
-	public static int TOP_PART = 100;
+	public static int TOP_PART = 50;
 	/**
 	 * There's a border to make it look pretty (the board is inset by this much).
 	 */
