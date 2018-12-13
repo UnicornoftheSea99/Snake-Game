@@ -213,6 +213,7 @@ public class World {
 		if (followers.isEmpty() || target.recentPositions.isEmpty()) {
 			return;
 		}
+
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
 		IntPoint last = putWhere.get(putWhere.size()-1);
 		for (int i = 0; i < followers.size(); i++) {

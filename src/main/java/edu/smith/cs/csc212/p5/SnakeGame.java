@@ -60,7 +60,6 @@ public class SnakeGame {
 
 		// Make the player out of the 0th fish color.
 		player = new SnakeHead(world);
-		world.register(player);
 
 		// Generate snake parts of all the colors but the first into the "missing" List.
 		for (int ft = 1; ft < SnakePart.COLORS.length; ft++) {
@@ -71,6 +70,8 @@ public class SnakeGame {
 			PowerUps powerup = new PowerUps(world);
 			world.insertRandomly(powerup);
 		}
+		world.register(player);
+
 	}
 
 	/**
@@ -171,10 +172,12 @@ public class SnakeGame {
 			}
 		}
 
-		// When snake part get added to "found" they will follow the player around.
-		World.objectsFollow(player, found);
+	
+		
 		// Step any world-objects that run themselves.
 		world.stepAll();
+		// When snake part get added to "found" they will follow the player around.
+		World.objectsFollow(player, found);
 	}
 
 	/**
@@ -185,7 +188,7 @@ public class SnakeGame {
 	 * @param y - the y-tile.
 	 */
 	public void click(int x, int y) {
-
+		System.out.println(world.find(x, y));
 	}
 
 }

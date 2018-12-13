@@ -8,6 +8,7 @@ import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -55,6 +56,8 @@ public class P5Main extends GFX {
 
 	int highScore = 0;
 	String name;
+
+	
 
 	public P5Main() {
 		super(VISUAL_GRID_SIZE + BORDER * 2, VISUAL_GRID_SIZE + BORDER * 2 + TOP_PART);
@@ -207,6 +210,7 @@ public class P5Main extends GFX {
 				g.drawRect(x * tw, y * th, tw, th);
 			}
 		}
+		
 
 		// For everything in our world:
 		for (WorldObject wo : world.viewItems()) {
@@ -308,20 +312,24 @@ public class P5Main extends GFX {
 		// Move the player if we can:
 		boolean moved = false;
 		if (up) {
-			moved = this.game.player.moveUp();
+			//moved = this.game.player.moveUp();
+			game.player.dir = 0;
 		} else if (down) {
-			moved = this.game.player.moveDown();
+			//moved = this.game.player.moveDown();
+			game.player.dir = 2;
 		} else if (left) {
-			moved = this.game.player.moveLeft();
+			//moved = this.game.player.moveLeft();
+			game.player.dir = 1;
 		} else if (right) {
-			moved = this.game.player.moveRight();
+			//moved = this.game.player.moveRight();
+			game.player.dir = 3;
 		}
 
 		IntPoint click = mouseToGame(this.processClick());
 
 		delay += 1;
 		// Only advance the game if the player presses something!
-		if (skip || moved || click != null || delay > 20) {
+		if (skip || moved || click != null || delay > 10) {
 			delay = 0;
 			if (click != null) {
 				this.game.click(click.x, click.y);

@@ -28,6 +28,10 @@ public class SnakeHead extends WorldObject {
 	 * Animate our fish by facing left and then right over time.
 	 */
 	private int dt = 0;
+	/**
+	 * The direction the snake is going at the beginning of the game is down
+	 */
+	public int dir = 2;
 
 	/**
 	 * Go ahead and ignore this method if you're not into graphics. We use "dt" as a
@@ -55,7 +59,7 @@ public class SnakeHead extends WorldObject {
 			flipped.scale(-1, 1);
 		}
 
-		// Draw the fish of size (1x1, roughly, at 0,0).
+		// Draw the Snake of size (1x1, roughly, at 0,0).
 		flipped.setColor(color);
 		flipped.fill(body);
 
@@ -73,6 +77,20 @@ public class SnakeHead extends WorldObject {
 
 	@Override
 	public void step() {
-		// Fish are controlled at a higher level; see FishGame.
+		if(dir == 0) {
+			moveUp();
+		}
+		else if (dir ==1){
+			moveLeft();
+		}
+		else if (dir == 2) {
+			moveDown();
+		}
+		else if(dir == 3) {
+			moveRight();
+		}
+		
 	}
-}
+	}
+
+	
