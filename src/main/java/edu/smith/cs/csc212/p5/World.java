@@ -25,7 +25,7 @@ public class World {
 	 */
 	private int height;
 	/**
-	 * A list of objects in the world (Fish, Snail, Rock, etc.).
+	 * A list of objects in the world 
 	 */
 	private List<WorldObject> items;
 	/**
@@ -85,7 +85,7 @@ public class World {
 	/**
 	 * Add an item to this World.
 	 * 
-	 * @param item - the Fish, Rock, Snail, or other WorldObject.
+	 * @param item 
 	 */
 	public void register(WorldObject item) {
 		// Print out what we've added, for our sanity.
@@ -94,7 +94,7 @@ public class World {
 	}
 
 	/**
-	 * This is the opposite of register. It removes an item (like a fish) from the
+	 * This is the opposite of register. It removes an item (like a snake part) from the
 	 * World.
 	 * 
 	 * @param item - the item to remove.
@@ -180,20 +180,12 @@ public class World {
 	 */
 	public boolean canSwim(WorldObject whoIsAsking, int x, int y) {
 
-		// This will be important.
-		boolean isPlayer = whoIsAsking.isPlayer();
-
-		// We will need to look at who all is in the spot to determine if we can move
-		// there.
-		List<WorldObject> inSpot = this.find(x, y);
-
-
 		// If we didn't see an obstacle, we can move there!
 		return true;
 	}
 
 	/**
-	 * This is how objects may move. Only Snails do right now.
+	 * This is how objects may move.
 	 */
 	public void stepAll() {
 		for (WorldObject it : this.items) {

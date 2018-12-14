@@ -25,9 +25,7 @@ public class SnakePart extends WorldObject {
 
 	@Override
 	public void draw(Graphics2D g) {
-		//Shape bg = new Rectangle2D.Double(-.5, -.5, 1.0, 1.0);
-		//g.setColor(new Color(1f,0f,0f,0.5f));
-		//g.fill(bg);
+
 
 		Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
 		Shape body2 = new Ellipse2D.Double(-.25, -.25, .5, .5);
@@ -48,7 +46,6 @@ public class SnakePart extends WorldObject {
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
 
 	}
 

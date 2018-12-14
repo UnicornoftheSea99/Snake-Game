@@ -6,16 +6,11 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
-/**
- * Most Fish behavior lives up in WorldObject (a Fish just looks special!). Or
- * it is in PlayFish, where the missing/found and player fish all act different!
- * 
- * @author jfoley
- */
+
 public class SnakeHead extends WorldObject {
 
 	/**
-	 * A Fish knows what World it belongs to, because all WorldObjects do.
+	 * A Snake knows what World it belongs to, because all WorldObjects do.
 	 * 
 	 * @param color Color by number.
 	 * @param world The world itself.
@@ -25,7 +20,7 @@ public class SnakeHead extends WorldObject {
 	}
 
 	/**
-	 * Animate our fish by facing left and then right over time.
+	 * Animate our snake by facing left and then right over time.
 	 */
 	private int dt = 0;
 	/**

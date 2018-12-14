@@ -17,7 +17,12 @@ import me.jjfoley.gfx.IntPoint;
 import me.jjfoley.gfx.TextBox;
 
 /***
- * This is a snake game uses the implementation of P2 (the fish game)
+ * This is a snake game and it uses the implementation of P2 (the fish game)
+ * Objective of the game is to get the highest score 
+ * by collecting a snake part or a powerup
+ * 
+ * But be careful because the game ends when the snake
+ * goes out of bounds or bumps into itself
  * 
  * @author libby
  *
@@ -312,16 +317,12 @@ public class P5Main extends GFX {
 		// Move the player if we can:
 		boolean moved = false;
 		if (up) {
-			//moved = this.game.player.moveUp();
 			game.player.dir = 0;
 		} else if (down) {
-			//moved = this.game.player.moveDown();
 			game.player.dir = 2;
 		} else if (left) {
-			//moved = this.game.player.moveLeft();
 			game.player.dir = 1;
 		} else if (right) {
-			//moved = this.game.player.moveRight();
 			game.player.dir = 3;
 		}
 
@@ -329,7 +330,7 @@ public class P5Main extends GFX {
 
 		delay += 1;
 		// Only advance the game if the player presses something!
-		if (skip || moved || click != null || delay > 10) {
+		if (skip || moved || click != null || delay > 8) {
 			delay = 0;
 			if (click != null) {
 				this.game.click(click.x, click.y);

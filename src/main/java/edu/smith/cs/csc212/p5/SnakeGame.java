@@ -1,6 +1,5 @@
 package edu.smith.cs.csc212.p5;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +9,7 @@ public class SnakeGame {
 
 	Random rand = ThreadLocalRandom.current(); 
 	/**
-	 * This is the world in which the snake head has to find its parts. (It's mostly a List!).
+	 * This is the world in which the snake head has to find its parts.
 	 */
 	World world;
 	/**
@@ -58,7 +57,7 @@ public class SnakeGame {
 		z = 10;
 		u = 8;
 
-		// Make the player out of the 0th fish color.
+		// Make the player out of the 0th snake color.
 		player = new SnakeHead(world);
 
 		// Generate snake parts of all the colors but the first into the "missing" List.
@@ -90,7 +89,7 @@ public class SnakeGame {
 	 */
 	public boolean gameOverLOSE() {
 
-
+		// going out of bounds
 		if (player.getX() < 0 || player.getX() >= world.getWidth() || player.getY() < 0
 				|| player.getY() >= world.getHeight()) {
 
@@ -98,11 +97,9 @@ public class SnakeGame {
 		} return false;
 
 
-		// if you collect all of the snake parts
-		//return missing.isEmpty();
-
 	}
 	public boolean gameOverLOSE2() {
+		//bump into body part
 		if (gameOver1 == false) {
 			//do nothing
 			return false;
@@ -181,8 +178,7 @@ public class SnakeGame {
 	}
 
 	/**
-	 * This gets a click on the grid. We want it to destroy rocks that ruin the
-	 * game.
+	 * This gets a click on the grid. 
 	 * 
 	 * @param x - the x-tile.
 	 * @param y - the y-tile.
