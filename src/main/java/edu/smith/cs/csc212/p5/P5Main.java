@@ -17,14 +17,14 @@ import me.jjfoley.gfx.IntPoint;
 import me.jjfoley.gfx.TextBox;
 
 /***
- * This is a snake game and it uses the implementation of P2 (the fish game)
+ * This is a snake game and it uses the implementation of P2 (the snake game)
  * Objective of the game is to get the highest score 
  * by collecting a snake part or a powerup
  * 
  * But be careful because the game ends when the snake
  * goes out of bounds or bumps into itself
  * 
- * @author libby
+ * @author libby and emily
  *
  */
 
@@ -258,7 +258,7 @@ public class P5Main extends GFX {
 	int delay = 0;
 
 	/**
-	 * We separate our "PlayFish" game logic update here.
+	 * We separate our game logic update here.
 	 * 
 	 * @param secondsSinceLastUpdate - my GFX code can tell us how long it is
 	 *                               between each update, but we don't actually care

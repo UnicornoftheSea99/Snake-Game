@@ -74,7 +74,7 @@ public class SnakeGame {
 	}
 
 	/**
-	 * How you win: if missingFishLeft() == 0.
+	 * How you win: if missingFishLeft() == 0 AKA if collect all the snake parts
 	 * 
 	 * @return the size of the missing list.
 	 */
@@ -145,7 +145,7 @@ public class SnakeGame {
 		for (WorldObject wo : overlap) {
 			// It is missing if it's in our missing list.
 			if (missing.contains(wo)) {
-				// Remove this fish from the missing list.
+				// Remove this snake part from the missing list.
 				missing.remove(wo);
 
 				SnakePart justFound = (SnakePart) wo;
@@ -162,7 +162,7 @@ public class SnakeGame {
 
 			}
 			// Points for Powerups
-			//If player comes across powerups, get 20 pts and fish food disappear from world
+			//If player comes across powerups, get 20 pts and powerup disappear from world
 			if (wo instanceof PowerUps) {
 				score += 20;
 				world.remove(wo);
