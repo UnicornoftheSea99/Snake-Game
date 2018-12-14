@@ -32,13 +32,16 @@ public class SnakeGame {
 	 */
 	int stepsTaken;
 
+	/**
+	 * Powerups that give bonus points when the snake picks it up!
+	 */
 	PowerUps powerup;
 
 	/**
 	 * Score!
 	 */
 	int score;
-
+	
 	int z;
 	int u;
 	int highScore=0;
@@ -70,7 +73,6 @@ public class SnakeGame {
 			world.insertRandomly(powerup);
 		}
 		world.register(player);
-
 	}
 
 	/**
@@ -95,9 +97,8 @@ public class SnakeGame {
 
 			return true;
 		} return false;
-
-
 	}
+	
 	public boolean gameOverLOSE2() {
 		//bump into body part
 		if (gameOver1 == false) {
@@ -107,7 +108,6 @@ public class SnakeGame {
 		else {
 			return true;
 		}
-
 	}
 
 	public boolean gameOverWIN() {
@@ -158,9 +158,8 @@ public class SnakeGame {
 				// you've just overlapped 
 				// game over!
 				gameOver1= true;
-
-
 			}
+			
 			// Points for Powerups
 			//If player comes across powerups, get 20 pts and powerup disappear from world
 			if (wo instanceof PowerUps) {
@@ -168,8 +167,6 @@ public class SnakeGame {
 				world.remove(wo);
 			}
 		}
-
-	
 		
 		// Step any world-objects that run themselves.
 		world.stepAll();

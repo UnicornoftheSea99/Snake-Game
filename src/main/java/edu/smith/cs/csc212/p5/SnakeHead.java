@@ -39,7 +39,8 @@ public class SnakeHead extends WorldObject {
 		if (dt > 100) {
 			dt = 0;
 		}
-	
+		
+		//create head
 		Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
 		Shape eyeL = new Ellipse2D.Double(-.2, -.05, .15, .15);
 		Shape eyeLW = new Ellipse2D.Double(-0.3, -0.17, .3, .3);
@@ -54,7 +55,7 @@ public class SnakeHead extends WorldObject {
 			flipped.scale(-1, 1);
 		}
 
-		// Draw the Snake of size (1x1, roughly, at 0,0).
+		// Draw the Snake Head.
 		flipped.setColor(color);
 		flipped.fill(body);
 

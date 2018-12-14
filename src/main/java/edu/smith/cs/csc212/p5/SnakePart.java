@@ -25,7 +25,8 @@ public class SnakePart extends WorldObject {
 
 	@Override
 	public void draw(Graphics2D g) {
-
+		
+		//Create snake part
 		Shape body = new Ellipse2D.Double(-.40, -.4, .8, .8);
 		Shape body2 = new Ellipse2D.Double(-.25, -.25, .5, .5);
 
@@ -33,7 +34,7 @@ public class SnakePart extends WorldObject {
 
 		Graphics2D flipped = (Graphics2D) g.create();
 
-		// Draw the snake.
+		// Draw the snake parts.
 		flipped.setColor(color);
 		flipped.fill(body);
 		flipped.setColor(Color.black);

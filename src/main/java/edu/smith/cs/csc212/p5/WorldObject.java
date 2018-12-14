@@ -40,12 +40,12 @@ public abstract class WorldObject {
 	public static int NUM_RECENT_POSITIONS = 256;
 	/**
 	 * Here, we use a special kind of list that makes it easy to add to the front
-	 * and remove from the back, so we keep up to NUM_RECENT_POSITIONS locations for every fish.
+	 * and remove from the back, so we keep up to NUM_RECENT_POSITIONS locations for every snake part.
 	 */
 	public Deque<IntPoint> recentPositions;
 
 	/**
-	 * Create a new WorldObject -- this is the call to super(world) in Fish.
+	 * Create a new WorldObject -- this is the call to super(world) in Snake part.
 	 * 
 	 * @param world the world filled with other objects.
 	 */
@@ -85,7 +85,7 @@ public abstract class WorldObject {
 
 	/**
 	 * Private method to keep track of this object's position history. Used to make
-	 * Fish follow the Player.
+	 * Snake part follow the Player.
 	 */
 	private void updatePosition() {
 		// Add to front.
